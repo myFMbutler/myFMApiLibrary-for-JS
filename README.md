@@ -5,7 +5,7 @@ Lesterius FileMaker 18 Data API wrapper - myFMApiLibrary for Javascript
 
 ## Team
 [Lesterius](https://www.lesterius.com "Lesterius") is a European FileMaker Business Alliance Platinum member that operates in Belgium, France, the Netherlands, Portugal and Spain. We are creative business consultants who co-create FileMaker Platform based solutions with our customers.\
-Sharing knowledge takes part of our DNA, that's why we developed this library to make the FileMaker Data API easy-to-use with PHP.\
+Sharing knowledge takes part of our DNA, that's why we developed this library to make the FileMaker Data API easy-to-use with Javascript.\
 Break the limits of your application!\
 ![Lesterius logo](http://i1.createsend1.com/ei/r/29/D33/DFF/183501/csfinal/Mailing_Lesterius-logo.png "Lesterius")
 
