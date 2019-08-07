@@ -1,0 +1,9 @@
+{
+  "name": "myfmbutler/myfmapilibrary-for-js",
+  "version": "1.0.0",
+  "repository": "git@gitlab.com:lesterius-web/sg-leia.git",
+  "description": "FileMaker 18 API Javascript wrapper",
+  "keywords": ["Lesterius", "FileMaker", "API", "REST", "Database", "Wrapper"],
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/myFMbutler/myFMApiLibrary-for-JS"
+}

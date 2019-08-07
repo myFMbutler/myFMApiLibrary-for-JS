@@ -1,0 +1,26 @@
+{
+    "name": "myfmbutler/myfmapilibrary-for-js",
+    "type": "library",
+    "description": "FileMaker 18 API Javascript wrapper",
+    "Keywords": ["Lesterius", "FileMaker", "API", "REST", "Database", "Wrapper"],
+    "license": "gpl-3.0",
+    "version": "1.0.0",
+    "minimum-stability": "stable",
+    "authors": [
+      {
+        "name": "Lesterius",
+        "email": "infoFR@lesterius.com",
+        "homepage": "https://www.lesterius.com"
+      }
+    ],
+    "autoload": {
+        "psr-4": {
+          "Lesterius\\FileMakerApi\\": "src",
+          "Tests\\": "tests/"
+        }
+    },
+    "config": {
+      "sort-packages": true,
+      "optimize-autoloader": true
+    }
+}
