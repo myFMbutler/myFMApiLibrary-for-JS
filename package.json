@@ -1,7 +1,6 @@
 {
   "name": "myfmbutler/myfmapilibrary-for-js",
-  "version": "2.0.0",
-  "repository": "git@gitlab.com:lesterius-web/sg-leia.git",
+  "version": "2.0.2",
   "description": "(Claris) FileMaker 19 API Javascript wrapper",
   "keywords": ["Lesterius", "FileMaker", "Claris", "API", "REST", "Database", "Wrapper"],
   "license": "GPL-3.0",
