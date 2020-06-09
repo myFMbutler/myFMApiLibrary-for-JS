@@ -1,4 +1,4 @@
-Lesterius FileMaker 18 Data API wrapper - myFMApiLibrary for Javascript
+Lesterius (Claris) FileMaker 19 Data API wrapper - myFMApiLibrary for Javascript
 =======================
 
 # Presentation
