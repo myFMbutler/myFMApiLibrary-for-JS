@@ -4,18 +4,21 @@ Lesterius FileMaker 18 Data API wrapper - myFMApiLibrary for Javascript
 # Presentation
 
 ## Team
-[Lesterius](https://www.lesterius.com "Lesterius") is a European FileMaker Business Alliance Platinum member that operates in Belgium, France, the Netherlands, Portugal and Spain. We are creative business consultants who co-create FileMaker Platform based solutions with our customers.\
+[Lesterius](https://www.lesterius.com "Lesterius") is a European Claris (FileMaker) Business Alliance Platinum member that operates in Belgium, France, the Netherlands, Portugal and Spain. We are creative business consultants who co-create FileMaker Platform based solutions with our customers.\
 Sharing knowledge takes part of our DNA, that's why we developed this library to make the FileMaker Data API easy-to-use with Javascript.\
 Break the limits of your application!\
 ![Lesterius logo](http://i1.createsend1.com/ei/r/29/D33/DFF/183501/csfinal/Mailing_Lesterius-logo.png "Lesterius")
 
 ## Description
-This library is a Javascript wrapper of the FileMaker Data API 18.<br/>
+This library is a Javascript wrapper of the (Claris) FileMaker Data API 19.<br/>
 
 You can find the PHP wrapper of the FileMaker Data API 18 [here](https://github.com/myFMbutler/myFMApiLibrary-for-PHP)<br/>
 
+You can find the Javascript wrapper of the FileMaker Data API 18 on the releases <= v.1.* .<br/>
+
+
 You will be able to use every functions like it's documented in your FileMaker server Data Api documentation (accessible via https://[your server domain]/fmi/data/apidoc).
-General FileMaker document on the Data API is available [here](https://fmhelp.filemaker.com/docs/18/en/dataapi/)
+General Claris document on the Data API is available [here](https://help.claris.com/en/data-api-guide/)
 
 
 ## Installation
@@ -89,6 +92,12 @@ To re generate a token, use 'login' function.
 
 ```javascript
 dataApi.logout();
+```
+
+### Validate Session
+
+```javascript
+dataApi.validateSession();
 ```
 
 ### Create record

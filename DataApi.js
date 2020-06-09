@@ -339,7 +339,8 @@ class CurlClient {
 const FILEMAKER_NO_RECORDS  = 401,
     SCRIPT_PREREQUEST     = 'prerequest',
     SCRIPT_PRESORT        = 'presort',
-    SCRIPT_POSTREQUEST    = 'postrequest';
+    SCRIPT_POSTREQUEST    = 'postrequest',
+    LASTVERSION           = 'vLatest';
 
 class DataApi {
 
@@ -355,6 +356,10 @@ class DataApi {
         // Set properties if in options variable
         if (options.hasOwnProperty('login')) {
             this.apiUsername = options.login;
+        }
+
+        if (options.hasOwnProperty('version')) {
+            this.version = options.version;
         }
 
         if (options.hasOwnProperty('password')) {
@@ -406,7 +411,7 @@ class DataApi {
             // Send curl request
             let response = this.ClientRequest.request(
                 'POST',
-                "/v1/databases/" + this.apiDatabase + "/sessions",
+                "/" + this.version + "/databases/" + this.apiDatabase + "/sessions",
                 {
                     headers: headers,
                     'json': []
@@ -431,13 +436,32 @@ class DataApi {
         // Send curl request
         this.ClientRequest.request(
             'DELETE',
-            "/v1/databases/" + this.apiDatabase + "/sessions/" + this.apiToken,
+            "/" + this.version + "/databases/" + this.apiDatabase + "/sessions/" + this.apiToken,
             []
         );
 
         this.apiToken = '';
 
         return this;
+    }
+
+    /**
+     * Validate Session
+     *
+     * @returns {boolean}
+     */
+    validateSession() {
+
+        // Send curl request
+        let response = this.ClientRequest.request(
+            'GET',
+            "/" + this.version + "/validateSession",
+            {
+                'headers':this.getDefaultHeaders()
+            }
+        );
+
+        return (typeof response.getBody().messages[0]['code'] !== 'undefined' && response.getBody().messages[0]['code'] == "0");
     }
 
     // -- End auth Part --
@@ -468,7 +492,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'POST',
-            "/v1/databases/" + this.apiDatabase + "/layouts/" + layout + "/records",
+            "/" + this.version + "/databases/" + this.apiDatabase + "/layouts/" + layout + "/records",
             {
                 'headers':this.getDefaultHeaders(),
                 'json':jsonOptions
@@ -491,7 +515,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'POST',
-            "/v1/databases/" + this.apiDatabase + "/layouts/" + layout + "/records/" + recordId,
+            "/" + this.version + "/databases/" + this.apiDatabase + "/layouts/" + layout + "/records/" + recordId,
             {
                 'headers': this.getDefaultHeaders(),
                 'json': this.prepareScriptOptions(scripts)
@@ -531,7 +555,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'PATCH',
-            "/v1/databases/" + this.apiDatabase + "/layouts/" + layout + "/records/" + recordId,
+            "/" + this.version + "/databases/" + this.apiDatabase + "/layouts/" + layout + "/records/" + recordId,
             {
                 'headers': this.getDefaultHeaders(),
                 'json': jsonOptions
@@ -553,7 +577,7 @@ class DataApi {
         // Send curl request
         this.ClientRequest.request(
             'DELETE',
-            "/v1/databases/" + this.apiDatabase + "/layouts/" + layout + "/records/" + recordId,
+            "/" + this.version + "/databases/" + this.apiDatabase + "/layouts/" + layout + "/records/" + recordId,
             {
                 'headers': this.getDefaultHeaders(),
                 'json': this.prepareScriptOptions(scripts)
@@ -590,7 +614,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'GET',
-            "/v1/databases/" + this.apiDatabase + "/layouts/" + layout + "/records/" + recordId,
+            "/" + this.version + "/databases/" + this.apiDatabase + "/layouts/" + layout + "/records/" + recordId,
             {
                 'headers': this.getDefaultHeaders(),
                 'query_params': jsonOptions
@@ -626,7 +650,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'GET',
-            "/v1/databases/" + this.apiDatabase + "/layouts/" + layout + "/records",
+            "/" + this.version + "/databases/" + this.apiDatabase + "/layouts/" + layout + "/records",
             {
                 'headers': this.getDefaultHeaders(),
                 'query_params': jsonOptions
@@ -675,7 +699,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'POST',
-            "/v1/databases/" + this.apiDatabase + "/layouts/" + layout + "/_find",
+            "/" + this.version + "/databases/" + this.apiDatabase + "/layouts/" + layout + "/_find",
             {
                 'headers': this.getDefaultHeaders(),
                 'json': jsonOptions
@@ -710,7 +734,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'GET',
-            "/v1/databases/" + this.apiDatabase + "/layouts/" + layout + "/script/" + scriptName,
+            "/" + this.version + "/databases/" + this.apiDatabase + "/layouts/" + layout + "/script/" + scriptName,
             {
                 'headers' : this.getDefaultHeaders(),
                 'query_params': jsonOptions,
@@ -749,7 +773,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'POST',
-            "/v1/databases/" + this.apiDatabase + "/layouts/" + layout + "/records/" + recordId + "/containers/"+ containerFieldName + containerFieldRepetitionFormat,
+            "/" + this.version + "/databases/" + this.apiDatabase + "/layouts/" + layout + "/records/" + recordId + "/containers/"+ containerFieldName + containerFieldRepetitionFormat,
             {
                 'headers': headers,
                 'fileObject': file
@@ -775,7 +799,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'PATCH',
-            "/v1/databases/" + this.apiDatabase + "/globals",
+            "/" + this.version + "/databases/" + this.apiDatabase + "/globals",
             {
                 'headers' : this.getDefaultHeaders(),
                 'json'   : {'globalFields' :JSON.stringify(globalFields)},
@@ -797,7 +821,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'GET',
-            "/v1/productInfo",
+            "/" + this.version + "/productInfo",
             {
                 'headers': this.getDefaultHeaders(),
                 'json': []
@@ -817,7 +841,7 @@ class DataApi {
             // Send curl request
             let response = this.ClientRequest.request(
                 'GET',
-                "/v1/databases",
+                "/" + this.version + "/databases",
                 {
                     'headers': this.getHeaderAuth(),
                     'json': []
@@ -838,7 +862,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'GET',
-            "/v1/databases/" + this.apiDatabase + "/layouts",
+            "/" + this.version + "/databases/" + this.apiDatabase + "/layouts",
             {
                 'headers': this.getDefaultHeaders(),
                 'json': []
@@ -856,7 +880,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'GET',
-            "/v1/databases/" + this.apiDatabase + "/scripts",
+            "/" + this.version + "/databases/" + this.apiDatabase + "/scripts",
             {
                 'headers': this.getDefaultHeaders(),
                 'json': []
@@ -886,7 +910,7 @@ class DataApi {
         // Send curl request
         let response = this.ClientRequest.request(
             'GET',
-            "/v1/databases/" + this.apiDatabase + "/layouts/" + layout + metadataFormat,
+            "/" + this.version + "/databases/" + this.apiDatabase + "/layouts/" + layout + metadataFormat,
             {
                 'headers': this.getDefaultHeaders(),
                 'json': jsonOptions
@@ -917,6 +941,13 @@ class DataApi {
      */
     setApiToken(apiToken) {
         this.apiToken = apiToken;
+    }
+
+    /**
+     * @param version
+     */
+    setVersion(version) {
+        this.version = version;
     }
 
     /**
@@ -1162,5 +1193,6 @@ class DataApi {
         this.apiToken           = '';
         this.apiDatabase        = '';
         this.ClientRequest      = '';
+        this.version            = LASTVERSION;
     }
 }
